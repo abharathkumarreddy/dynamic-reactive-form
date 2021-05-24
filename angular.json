@@ -1,0 +1,168 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "dynamic-reactive-form": {
+      "projectType": "library",
+      "root": "projects/dynamic-reactive-form",
+      "sourceRoot": "projects/dynamic-reactive-form/src",
+      "prefix": "tk",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/dynamic-reactive-form/tsconfig.lib.json",
+            "project": "projects/dynamic-reactive-form/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/dynamic-reactive-form/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dynamic-reactive-form/src/test.ts",
+            "tsConfig": "projects/dynamic-reactive-form/tsconfig.spec.json",
+            "karmaConfig": "projects/dynamic-reactive-form/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/dynamic-reactive-form/tsconfig.lib.json",
+              "projects/dynamic-reactive-form/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "dynamic-reactive-form-test": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/dynamic-reactive-form-test",
+      "sourceRoot": "projects/dynamic-reactive-form-test/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/dynamic-reactive-form-test",
+            "index": "projects/dynamic-reactive-form-test/src/index.html",
+            "main": "projects/dynamic-reactive-form-test/src/main.ts",
+            "polyfills": "projects/dynamic-reactive-form-test/src/polyfills.ts",
+            "tsConfig": "projects/dynamic-reactive-form-test/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/dynamic-reactive-form-test/src/favicon.ico",
+              "projects/dynamic-reactive-form-test/src/assets"
+            ],
+            "styles": [
+              "projects/dynamic-reactive-form-test/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/dynamic-reactive-form-test/src/environments/environment.ts",
+                  "with": "projects/dynamic-reactive-form-test/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "dynamic-reactive-form-test:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "dynamic-reactive-form-test:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "dynamic-reactive-form-test:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/dynamic-reactive-form-test/src/test.ts",
+            "polyfills": "projects/dynamic-reactive-form-test/src/polyfills.ts",
+            "tsConfig": "projects/dynamic-reactive-form-test/tsconfig.spec.json",
+            "karmaConfig": "projects/dynamic-reactive-form-test/karma.conf.js",
+            "assets": [
+              "projects/dynamic-reactive-form-test/src/favicon.ico",
+              "projects/dynamic-reactive-form-test/src/assets"
+            ],
+            "styles": [
+              "projects/dynamic-reactive-form-test/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/dynamic-reactive-form-test/tsconfig.app.json",
+              "projects/dynamic-reactive-form-test/tsconfig.spec.json",
+              "projects/dynamic-reactive-form-test/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/dynamic-reactive-form-test/e2e/protractor.conf.js",
+            "devServerTarget": "dynamic-reactive-form-test:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "dynamic-reactive-form-test:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "dynamic-reactive-form"
+}
