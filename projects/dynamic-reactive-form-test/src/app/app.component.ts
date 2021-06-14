@@ -7,7 +7,7 @@ import { FormField, FormConfiguration } from 'dynamic-reactive-form';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  staticForm: FormField[] = [
+  staticFormControls: FormField[] = [
     {
       fieldLabel: 'FirstName',
       controlName: 'firstName',
