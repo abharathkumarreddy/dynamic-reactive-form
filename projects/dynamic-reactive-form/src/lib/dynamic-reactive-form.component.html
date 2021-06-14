@@ -1,0 +1,11 @@
+<mat-horizontal-stepper>
+  <mat-step
+    *ngFor="let group of formGroups"
+    [stepControl]="formGroup.get(group.groupName)"
+  >
+    <tk-form-group
+      [formGroup]="formGroup.get(group.groupName)"
+      [groupFields]="group.groupFields"
+    ></tk-form-group>
+  </mat-step>
+</mat-horizontal-stepper>
